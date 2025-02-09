@@ -1,14 +1,12 @@
 import React, { useContext } from 'react'
 import Layout from '../../components/layout/Layout.jsx'
-import myContext from '../../context/data/myContext.jsx'
+import HeroSection from '../../components/heroSection/HeroSection.jsx'
 
 const Home = () => {
-  const context = useContext(myContext)
-  const { name, rollno } = context
+
   return (
     <Layout>
-      <h1>Name: {name}</h1>
-      <h1>Rollno: {rollno}</h1>
+      <HeroSection />
     </Layout>
   )
 }
