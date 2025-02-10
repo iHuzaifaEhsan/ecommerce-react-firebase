@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import myContext from '../../context/data/myContext';
 import Layout from '../../components/layout/Layout';
-
+import Modal from '../../components/modal/Modal.jsx';
 
 function Cart() {
 
@@ -50,7 +50,7 @@ function Cart() {
                 <p className="mb-1 text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>₹200</p>
               </div>
             </div>
-
+            <Modal />
           </div>
         </div>
       </div>
