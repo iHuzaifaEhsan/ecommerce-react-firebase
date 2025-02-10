@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import myContext from '../../context/data/myContext';
 import Layout from '../../components/layout/Layout';
-import Modal from '../../components/modal/Modal'
-
+import Modal from '../../components/modal/modal';
 
 function Cart() {
 
