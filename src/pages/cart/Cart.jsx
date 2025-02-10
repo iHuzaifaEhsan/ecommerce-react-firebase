@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import myContext from '../../context/data/myContext';
 import Layout from '../../components/layout/Layout';
+import Model from '../../components/model/Model'
 
 function Cart() {
 
@@ -30,7 +31,7 @@ function Cart() {
                 </div>
               </div>
             </div>
-
+           
           </div>
 
           <div className="mt-6 h-full rounded-lg border-none bg-white p-6 shadow-md md:mt-0 md:w-1/3" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '', }}>
@@ -49,6 +50,7 @@ function Cart() {
                 <p className="mb-1 text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>₹200</p>
               </div>
             </div>
+        <Model />
           </div>
         </div>
       </div>
