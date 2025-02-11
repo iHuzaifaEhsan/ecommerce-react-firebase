@@ -4,6 +4,8 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 import Home from './pages/home/Home';
 import Order from './pages/order/Order';
@@ -35,6 +37,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/*" element={<NoPage />} />
         </Routes>
+        <ToastContainer />
       </Router>
     </MyState>
 
