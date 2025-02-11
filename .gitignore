@@ -136,7 +136,7 @@ sketch
 **/node_modules/*
 **/.firebaserc
 
-FirebaseConfig.js
+src/firebase/FirebaseConfig.js/
 
 
 
