@@ -11,6 +11,7 @@ import UpdateProduct from './pages/admin/page/UpdateProduct.jsx'
 import NoPage from './pages/nopage/NoPage.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import MyState from './context/data/MyState.jsx'
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
@@ -28,8 +29,8 @@ const App = () => {
           <Route path='/addproduct' element={<AddProduct />} />
           <Route path='/updateproduct' element={<UpdateProduct />} />
           <Route path='/*' element={<NoPage />} />
-
         </Routes>
+        <ToastContainer />
       </Router>
     </MyState>
   )
