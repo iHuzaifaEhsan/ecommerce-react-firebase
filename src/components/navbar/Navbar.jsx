@@ -9,8 +9,17 @@ import { RxCross2 } from 'react-icons/rx'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
-  const context = useContext(myContext)
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  
+
+  const context = useContext(myContext) 
   const { toggleMode, mode } = context
+
+  const logout = () => {
+    localStorage.clear('user');
+    window.location.href = '/login'
+  }
 
   return (
     <div className="bg-white sticky top-0 z-50  "  >
@@ -61,21 +70,24 @@ export default function Navbar() {
                     </Link>
                   </div>
 
-                  <div className="flow-root">
-                    <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
-                      admin
-                    </Link>
-                  </div>
+                  {user?.user?.email === import.meta.env.VITE_ADMIN_EMAIL_ID ?
+                    <div className="flow-root">
+                      <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-gray-900" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                        admin
+                      </Link>
+                    </div> : ""
+                  }
+
 
                   <div className="flow-root">
-                    <a className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                    <a onClick={logout} className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
                       Logout
                     </a>
                   </div>
 
                 </div>
 
-                
+
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -121,11 +133,14 @@ export default function Navbar() {
                   <Link to={'/order'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Order
                   </Link>
-                  <Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
-                    Admin
-                  </Link>
 
-                  <a className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  {user?.user?.email === import.meta.env.VITE_ADMIN_EMAIL_ID ?
+                    <Link to={'/dashboard'} className="text-sm font-medium text-gray-700 " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                      Admin
+                    </Link> : ""
+                  }
+
+                  <a onClick={logout} className="text-sm font-medium text-gray-700 cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Logout
                   </a>
                 </div>
