@@ -18,11 +18,11 @@ const MyState = (props) => {
   }
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState({
-    title: null,
-    price: null,
-    imageUrl: null,
-    category: null,
-    description: null,
+    title: "",
+    price: "",
+    imageUrl: "",
+    category: "",
+    description: "",
     time: Timestamp.now(),
     date: new Date().toLocaleDateString(
       "en-US",
@@ -34,7 +34,7 @@ const MyState = (props) => {
     )
   });
   const addProduct = async () => {
-    if (products.title == null || products.price == null || products.imageUrl == null || products.category == null || products.description == null) {
+    if (products.title == "" || products.price == "" || products.imageUrl == "" || products.category == "" || products.description == "") {
       return toast.error("All fields are required")
     }
     setLoading(true)
@@ -42,6 +42,10 @@ const MyState = (props) => {
       const productRef = collection(fireDB, 'products');
       await addDoc(productRef, products)
       toast.success("Product Added Successfully")
+      getProductData();
+      setTimeout(() => {
+        window.location.href = ('/dashboard')
+      }, 800);
       setLoading(false);
     } catch (error) {
       console.log(error)
@@ -49,29 +53,30 @@ const MyState = (props) => {
     }
   }
   const [product, setProduct] = useState([]);
+  const getProductData = async () => {
+    setLoading(true)
+    try {
+      const q = query(
+        collection(fireDB, 'products'),
+        orderBy('time')
+      )
+      const data = onSnapshot(q, (QuerySnapshot) => {
+        let productArray = [];
+        QuerySnapshot.forEach((doc) => {
+          productArray.push({ ...doc.data(), id: doc.id })
+        });
+        setProduct(productArray)
+        setLoading(false)
+      })
+      return () => data;
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const getProductData = async () => {
-      setLoading(true)
-      try {
-        const q = query(
-          collection(fireDB, 'products'),
-          orderBy('time')
-        )
-        const data = onSnapshot(q, (QuerySnapshot) => {
-          let productArray = [];
-          QuerySnapshot.forEach((doc) => {
-            productArray.push({ ...doc.data(), id: doc.id })
-          });
-          setProduct(productArray)
-          setLoading(false)
-        })
-        return () => data;
-      } catch (error) {
-        console.log(error)
-        setLoading(false)
-      }
-    }
+    getProductData()
   }, [])
 
 
